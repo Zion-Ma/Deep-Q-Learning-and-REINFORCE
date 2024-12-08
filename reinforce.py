@@ -23,6 +23,12 @@ class Reinforce(tf.keras.Model):
         self.num_actions = num_actions
         self.state_size = state_size
         # TODO: Define network parameters and optimizer
+        self.model = tf.keras.Sequential([
+            tf.keras.layers.InputLayer(input_shape=(self.state_size,)),
+            tf.keras.layers.Dense(128, activation='relu'),
+            tf.keras.layers.Dense(128, activation='relu'),
+            tf.keras.layers.Dense(self.num_actions),
+        ])
         raise NotImplementedError
 
     def call(self, states):
