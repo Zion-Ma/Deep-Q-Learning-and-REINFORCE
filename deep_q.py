@@ -41,7 +41,7 @@ class DeepQModel(tf.keras.Model):
         action_indices = tf.stack([tf.range(batch_actions.shape[0]), batch_actions], axis = 1)
         q_values_taken = tf.gather_nd(q_values, action_indices)
         # Compute the target Q-value
-        target_q_values = batch_rewards + discount_factor * tf.where(batch_done, 1, 0) * max_next_q_values
+        target_q_values = batch_rewards + discount_factor * tf.where(batch_done, 1.0, 0.0) * max_next_q_values
         # Compute the TD error
         td_error = q_values_taken - target_q_values
         # Compute the mean squared error
